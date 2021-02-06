@@ -8,6 +8,10 @@
     <artifactId>easy-http</artifactId>
     <version>1.0-RELEASE</version>
 
+    <name>easy-http</name>
+    <url>https://github.com/cnzhoutao/easy-http</url>
+    <description>Easy request for http and https.</description>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -61,8 +65,6 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <description>Easy request for http and https.</description>
 
     <scm>
         <connection>scm:git:https://github.com/cnzhoutao/easy-http.git</connection>
@@ -150,6 +152,26 @@
             </distributionManagement>
         </profile>
     </profiles>
+
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</name>
+            <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>cnzhoutao</id>
+            <name>cnzhoutao</name>
+            <email>nankezt@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 
 
 </project>
