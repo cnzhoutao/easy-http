@@ -12,19 +12,16 @@ public class ProxyUtil<T> extends ProxyHandler<T> {
 
     @Override
     public void onException(Exception ex) {
-        System.out.println("代理发生异常:" + ex.getMessage());
-        ex.getMessage();
+        ex.printStackTrace();
     }
 
     @Override
     public void after(Object[] args) {
-        System.out.println("执行代理方法后");
 
     }
 
     @Override
     public void before(Object[] args) {
-        System.out.println("执行代理方法前");
     }
 
 }

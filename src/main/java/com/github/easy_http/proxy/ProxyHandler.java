@@ -56,8 +56,6 @@ public abstract class ProxyHandler<T> implements InvocationHandler {
             // 调用前的业务处理
             before(args);
             RequestContext requestContext = this.parseRequestParam2Context(method, args);
-            // 执行被代理对象的方法
-            System.out.println("执行http请求--------》" + method.getName());
             // 调用后的业务处理
             after(args);
             // header前置处理
@@ -176,7 +174,6 @@ public abstract class ProxyHandler<T> implements InvocationHandler {
         // 处理PathVariable
         this.handlePathVariable(requestContext);
 
-        System.out.println("开始参数解析完毕!");
         return requestContext;
     }
 
