@@ -213,3 +213,11 @@ CookieHandler和HeaderHandler会规格自提供一个map,只需要将想要添�
 https://github.com/cnzhoutao/easy-http-test
 ```
 
+#### 依赖
+```
+        <dependency>
+            <groupId>com.github.cnzhoutao</groupId>
+            <artifactId>easy-http</artifactId>
+            <version> ${latest.version} </version>
+        </dependency>
+```
