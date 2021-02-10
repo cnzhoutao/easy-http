@@ -94,7 +94,9 @@ public abstract class ProxyHandler<T> implements InvocationHandler {
      */
     private Object wrapToReturnType(RequestContext requestContext, ResponseInfo responseInfo)
             throws ClassNotFoundException {
-        if (requestContext.getReturnType().equals(List.class)) {
+        if (String.class.equals(requestContext.getReturnType())) {
+            return responseInfo.getRes();
+        } else if (List.class.equals(requestContext.getReturnType())) {
             ParameterizedType genericReturnType1 = requestContext.getGenericReturnType();
             Type[] actualTypeArguments = genericReturnType1.getActualTypeArguments();
             String typeName = actualTypeArguments[0].getTypeName();
