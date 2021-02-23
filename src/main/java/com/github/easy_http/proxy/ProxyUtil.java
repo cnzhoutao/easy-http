@@ -10,18 +10,4 @@ public class ProxyUtil<T> extends ProxyHandler<T> {
         super(cls);
     }
 
-    @Override
-    public void onException(Exception ex) {
-        ex.printStackTrace();
-    }
-
-    @Override
-    public void after(Object[] args) {
-
-    }
-
-    @Override
-    public void before(Object[] args) {
-    }
-
 }

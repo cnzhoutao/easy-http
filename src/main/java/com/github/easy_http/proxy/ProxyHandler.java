@@ -6,10 +6,10 @@ import com.github.easy_http.context.RequestContext;
 import com.github.easy_http.enums.HttpMethodEnum;
 import com.github.easy_http.http.NetWorkManager;
 import com.github.easy_http.response.ResponseInfo;
-import com.github.easy_http.service.CookieOpService;
-import com.github.easy_http.service.HeaderOpService;
+import com.github.easy_http.service.*;
 import com.github.easy_http.util.CHThreadLocalUtils;
 import com.github.easy_http.util.JsonXmlUtils;
+import com.github.easy_http.util.SpringContextUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Annotation;
@@ -52,12 +52,19 @@ public abstract class ProxyHandler<T> implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        HttpMethodPostProcessor httpMethodPostProcessor = new DefaultHttpMethodPostProcessor();
+        MethodInterceptorStrategyService methodInterceptorStrategyService =
+                SpringContextUtil.getBean(MethodInterceptorStrategyService.class);
+        if (methodInterceptorStrategyService != null) {
+            httpMethodPostProcessor = methodInterceptorStrategyService.supplyMethod(method.getName());
+        }
+
         try {
             // 调用前的业务处理
-            before(args);
+            httpMethodPostProcessor.before(args);
             RequestContext requestContext = this.parseRequestParam2Context(method, args);
             // 调用后的业务处理
-            after(args);
+            httpMethodPostProcessor.after(args);
             // header前置处理
             this.executeHeaderHandler(requestContext);
             // cookie前置处理
@@ -79,7 +86,7 @@ public abstract class ProxyHandler<T> implements InvocationHandler {
         } catch (Exception e) {
             // 自定义的异常方法
             e.printStackTrace();
-            onException(e);
+            httpMethodPostProcessor.onException(e);
         }
         return null;
     }
@@ -301,26 +308,4 @@ public abstract class ProxyHandler<T> implements InvocationHandler {
         //执行请求
         return NetWorkManager.execute(requestContext);
     }
-
-    /***
-     * 出现异常时处理
-     *
-     * @param ex
-     */
-    public abstract void onException(Exception ex);
-
-    /**
-     * 调用方法后处理
-     *
-     * @param args
-     */
-    public abstract void after(Object[] args);
-
-    /**
-     * 调用方法前处理
-     *
-     * @param args
-     */
-    public abstract void before(Object[] args);
-
 }
