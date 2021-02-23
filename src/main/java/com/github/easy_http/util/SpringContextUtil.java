@@ -14,7 +14,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        applicationContext = applicationContext;
+        SpringContextUtil.applicationContext = applicationContext;
     }
 
     public static  <T> T getBean(Class<? extends T> clazz) {
