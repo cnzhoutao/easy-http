@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2021/2/24 7:04 下午
  */
 @Configuration
-@EnableAutoConfiguration
 public class EasyHttpConfig {
 
     @Bean
