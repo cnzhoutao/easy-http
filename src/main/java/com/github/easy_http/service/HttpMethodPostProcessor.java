@@ -11,25 +11,19 @@ public interface HttpMethodPostProcessor {
      *
      * @param ex 异常信息
      */
-    default public void onException(Exception ex) {
-        ex.printStackTrace();
-    }
+    public void onException(Exception ex);
 
     /**
      * 执行http请求后
      *
      * @param args 参数
      */
-    default public void after(Object[] args) {
-
-    }
+    public void after(Object[] args);
 
     /**
      * 执行http请求前
      *
      * @param args 参数
      */
-    default public void before(Object[] args) {
-    }
-
+    public void before(Object[] args);
 }

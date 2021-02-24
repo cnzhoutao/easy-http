@@ -14,8 +14,6 @@ public interface MethodInterceptorStrategyService {
      * @param methodName 方法名
      * @return http请求前中后的处理器
      */
-    default public HttpMethodPostProcessor supplyMethod(String methodName) {
-        return new DefaultHttpMethodPostProcessor();
-    }
+    public HttpMethodPostProcessor supplyMethod(String methodName);
 
 }
