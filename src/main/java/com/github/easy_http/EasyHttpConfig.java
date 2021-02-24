@@ -4,6 +4,7 @@ import com.github.easy_http.service.DefaultHttpMethodPostProcessor;
 import com.github.easy_http.service.DefaultMethodInterceptorStrategyService;
 import com.github.easy_http.service.HttpMethodPostProcessor;
 import com.github.easy_http.service.MethodInterceptorStrategyService;
+import com.github.easy_http.util.SpringContextUtil;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,11 @@ public class EasyHttpConfig {
     @ConditionalOnMissingBean(value = MethodInterceptorStrategyService.class)
     public MethodInterceptorStrategyService methodInterceptorStrategyService() {
         return new DefaultMethodInterceptorStrategyService();
+    }
+
+    @Bean
+    public SpringContextUtil springContextUtil() {
+        return new SpringContextUtil();
     }
 
 
