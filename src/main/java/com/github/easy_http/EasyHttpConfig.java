@@ -4,6 +4,7 @@ import com.github.easy_http.service.DefaultHttpMethodPostProcessor;
 import com.github.easy_http.service.DefaultMethodInterceptorStrategyService;
 import com.github.easy_http.service.HttpMethodPostProcessor;
 import com.github.easy_http.service.MethodInterceptorStrategyService;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2021/2/24 7:04 下午
  */
 @Configuration
+@EnableAutoConfiguration
 public class EasyHttpConfig {
 
     @Bean
