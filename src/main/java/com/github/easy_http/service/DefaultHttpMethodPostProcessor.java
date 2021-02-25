@@ -13,7 +13,6 @@ public class DefaultHttpMethodPostProcessor implements HttpMethodPostProcessor {
      */
     @Override
     public void onException(Exception ex) {
-        ex.printStackTrace();
     }
 
     /**
@@ -23,7 +22,6 @@ public class DefaultHttpMethodPostProcessor implements HttpMethodPostProcessor {
      */
     @Override
     public void after(Object[] args) {
-
     }
 
     /**

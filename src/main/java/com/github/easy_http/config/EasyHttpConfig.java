@@ -1,4 +1,4 @@
-package com.github.easy_http;
+package com.github.easy_http.config;
 
 import com.github.easy_http.service.DefaultHttpMethodPostProcessor;
 import com.github.easy_http.service.DefaultMethodInterceptorStrategyService;
