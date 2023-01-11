@@ -36,10 +36,16 @@ public class ApiImportBeanDefinitionRegistry implements ImportBeanDefinitionRegi
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
+        if (!metadata.hasAnnotation(EnableApi.class.getName())) {
+            return;
+        }
         Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(EnableApi.class.getName());
         String[] basePackages = (String[]) annotationAttributes.get("basePackages");
         if (basePackages == null || basePackages.length <= 0) {
-            return;
+            basePackages = new String[1];
+            final String className = metadata.getClassName();
+            final String packageName = className.substring(0, className.lastIndexOf("."));
+            basePackages[0] = packageName;
         }
         ClassPathScanningCandidateComponentProvider scanner = this.getScanner();
         scanner.setResourceLoader(resourceLoader);
