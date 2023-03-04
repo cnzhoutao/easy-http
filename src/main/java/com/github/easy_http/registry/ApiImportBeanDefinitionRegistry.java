@@ -19,6 +19,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 import java.util.Set;
@@ -79,9 +80,9 @@ public class ApiImportBeanDefinitionRegistry implements ImportBeanDefinitionRegi
                                      Map<String, Object> attributes) {
         BeanDefinitionBuilder definitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(ApiFactoryBean.class);
         definitionBuilder.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
-        definitionBuilder.addPropertyValue("hostName", attributes.get("hostName"));
-        definitionBuilder.addPropertyValue("https", attributes.get("https"));
-        definitionBuilder.addPropertyValue("url", attributes.get("url"));
+        definitionBuilder.addPropertyValue("hostName", getValueByKey(attributes.get("hostName")));
+        definitionBuilder.addPropertyValue("https", getValueByKey(attributes.get("https")));
+        definitionBuilder.addPropertyValue("url", getValueByKey(attributes.get("url")));
         String className = annotationMetadata.getClassName();
         definitionBuilder.addPropertyValue("type", className);
         definitionBuilder.setLazyInit(false);
@@ -115,5 +116,22 @@ public class ApiImportBeanDefinitionRegistry implements ImportBeanDefinitionRegi
     @Override
     public void setEnvironment(Environment environment) {
         this.environment = environment;
+    }
+
+    /**
+     * 把key 当成占位符进行解析
+     *
+     * @param keyObj 参数key
+     * @return String
+     */
+    private String getValueByKey(Object keyObj) {
+        final String key = String.valueOf(keyObj);
+        if (StringUtils.startsWithIgnoreCase(key, "${")) {
+            final String removeLeft = StringUtils.replace(key, "${", "");
+            final String realKey = StringUtils.replace(removeLeft, "}", "");
+            return environment.getProperty(realKey);
+        } else {
+            return key;
+        }
     }
 }
