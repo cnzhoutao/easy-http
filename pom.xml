@@ -7,7 +7,7 @@
 
     <groupId>com.github.cnzhoutao</groupId>
     <artifactId>easy-http</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
 
     <name>easy-http</name>
     <url>https://github.com/cnzhoutao/easy-http</url>
